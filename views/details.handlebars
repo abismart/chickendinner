@@ -1,0 +1,235 @@
+	<!DOCTYPE html>
+	<html>
+	<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <style type="text/css">
+     body{
+    background: url("bridge.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+    
+    .container{
+      width: 85%;
+      max-width: 600px;
+      position: absolute;
+        top: 50%;
+        left: 50%;
+        transform:translate(-50%,-50%);
+        padding: 30px 40px;
+        box-sizing: border-box;
+        border-radius: 8px;
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+        transition: all 200ms ease-out;
+    }
+
+    .container:hover {
+      box-shadow: 0 0 10px rgba(255, 255, 255);
+      }
+
+    input[type=text]:hover,input[type=Email]:hover,input[type=password]:hover,select:hover,input[type=tel]:hover {
+      box-shadow: 0 0 6px rgb(90, 149, 244);
+      }
+    label{
+      color: #000000;
+      font-size: 20px;
+      font-family: 'Arial';
+    }
+
+    input[type=text],input[type=password],input[type=Email],select,input[type=tel] {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-top: 6px;
+        margin-bottom: 16px;
+        resize: vertical;
+      }
+
+
+    input[type=text],input[type=password],input[type=Email],select,input[type=tel]{
+        background-color:rgb(155, 152, 152);
+      }
+
+
+    input[type=text]:hover,input[type=password]:hover,input[type=Email]:hover,select:hover,input[type=tel]:hover{
+        background-color: white;
+      }
+
+    input[type=submit] ,a{
+        background-color: #4CAF50;
+      }
+
+    input[type=submit]:hover,a:hover {
+        background-color:white;
+      }
+
+/* Set a style for the submit button */
+    .btn {
+        background-color: #42b3f4;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 50%;
+        opacity: 0.9;
+      }
+
+    .btn :hover {
+        opacity: 1;
+        width: 50%;
+        background-color: white;
+      }
+    .btn btn-secondary btn-secondary display-4{
+        background-color:blue ;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 50%;
+        opacity: 0.9; 
+      }
+
+    .btn btn-secondary btn-secondary display-4:hover {
+        opacity: 1;
+        width: 50%;
+        background-color: white;
+      }
+    ::placeholder {
+        color: black;
+        opacity: 1; /* Firefox */
+      }
+
+      .item{
+        color: yellow;
+        font-size: 20px;
+      }
+      img{
+       border-radius : 50%;
+      }
+   </style>
+</head>
+<body>
+
+<div class="container">
+  {{# if user }}
+            <a href="/logout"><button class="btn btn-primary"> logout</button></a>
+            <article class="item">
+              <h1>items</h1>
+                <div>name:     {{ user.name }}</div>
+                <div>phone:    {{ user.phone }}</div>
+                <div>avatar :  <img src="{{user.avatar}}" width="70px"  ></div>
+                <div>college:  {{ user.college }}</div>
+            </article>
+            <h1>YOU ARE REGISTERD </h1>
+  </div>      
+  
+
+               
+  
+{{else}}
+    <h1>Players Unknown Battle Grounds</h1>
+    <p>Sign in and view your profile!</p>
+    <p>
+    <a data-toggle="collapse" href="#local-sign-in" id="log" class="btn btn1 " role="button"><span class="glyphicon glyphicon-user"> Login</span></a>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('#reg').click(function(){
+          $('#local-sign-in').hide();
+          $('#local-reg').show();
+        });
+      });
+    </script>
+        <script type="text/javascript">
+      $(document).ready(function(){
+        $('#log').click(function(){
+          $('#local-sign-in').show();
+          $('#local-reg').hide();
+        });
+      });
+    </script>
+    <a data-toggle="collapse" href="#local-reg" id="reg" class="btn btn1" role="button"><span class="glyphicon glyphicon-user"></span> Sign-up</a>
+    </p>
+  <form id="local-sign-in" class="collapse" action="/login" method="post">
+    <div>
+        <p></p>
+        <label>E-mail:</label>
+        <input type="email" id="mail" name="username"/ required>
+    </div>
+    <div>
+        <label>Password:</label>
+        <input type="password" name="password"/ required>
+    </div>
+    <div>
+        <button class="btn btn1" style="font-size:10px">Loginn <i class="fa fa-sign-in"></i></button>
+    </div>
+  </form>
+  <form id="local-reg" class="collapse" action="/local-reg" method="post">
+    <div>
+        <p></p>
+        <label>E-mail ID:</label>
+        <input type="email" id="mail1" name="username"/ required>
+    </div>
+    <script>
+      var email = document.getElementById("mail");
+
+email.addEventListener("input", function (event) {
+  if (email.validity.typeMismatch) {
+    email.setCustomValidity("I expect an e-mail, darling!");
+  } else {
+    email.setCustomValidity("");
+  }
+});
+    </script>
+    <script>
+      var email = document.getElementById("mail1");
+
+email.addEventListener("input", function (event) {
+  if (email.validity.typeMismatch) {
+    email.setCustomValidity("I expect an e-mail, darling!");
+  } else {
+    email.setCustomValidity("");
+  }
+});
+    </script>
+    <div>
+        <label>Password:</label>
+        <input type="password" name="password" id="password"/ >
+    </div>
+    <div>
+        <label>Confirm Password:</label>
+        <input type="password" name="cpassword" id="confirm_password"/ >
+        <span id='message'></span>
+    </div>
+    <script type="text/javascript">
+      $('#password, #confirm_password').on('keyup', function () {
+  if ($('#password').val() == $('#confirm_password').val()) {
+    $('#message').html('Matching').css('color', 'green');
+  } else 
+    $('#message').html('Not Matching').css('color', 'red');
+});
+    </script>
+    <script type="text/javascript">
+    function Validate() {
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirm_password").value;
+        if (password != confirmPassword) {
+            alert("Passwords do not match.");
+            return false;
+        }
+        return true;
+    }
+</script>
+    <div>
+        <input type="submit" class="btn btn-primary btn-sm" value="Register" onclick="return Validate()" / >
+    </div>
+  </form>
+{{/if}}
+</body>
+</html>
